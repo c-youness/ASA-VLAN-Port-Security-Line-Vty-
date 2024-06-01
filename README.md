@@ -28,6 +28,14 @@ R2(config-if)#ip add 10.1.1.1 255.255.255.252
 ======
 R2(config-if)#no shutdown
 ======
+R2(config-if)#exit
+======
+R2(config)#interface f 0/0
+======
+R2(config-if)#ip add 192.168.2.1 255.255.255.0
+======
+R2(config-if)#no shutdown
+======
 Router 3
 ======
 R3(config)#interface S 0/1/0
@@ -61,4 +69,23 @@ ChalYouness(config)#enable password YO@UN@ESS@2024
 ---
 ChalYouness(config)#clock set 15:30:00 Jun 1 2024
 ---------
+ChalYouness(config)#inter vlan 1
+---------
+ChalYouness(config-if)#ip add 192.168.1.1 255.255.255.0
+---------
+ChalYouness(config-if)#nameif inside
+---------
+ChalYouness(config-if)#security-level 100
+---------
+ChalYouness(config-if)#exit
+---------
+ChalYouness(config)#inter vlan 2
+---------
+ChalYouness(config-if)#nameif  outside
+---------
+ChalYouness(config-if)#security-level 0
+---------
+ChalYouness(config-if)#ip add 209.165.200.224 255.255.255.248
+---------
+
 
