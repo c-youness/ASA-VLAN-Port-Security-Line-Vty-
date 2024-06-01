@@ -85,7 +85,11 @@ ChalYouness(config-if)#nameif  outside
 ---------
 ChalYouness(config-if)#security-level 0
 ---------
-ChalYouness(config-if)#ip add 209.165.200.224 255.255.255.248
+ChalYouness(config-if)#ip add 209.165.200.226 255.255.255.248
 ---------
+ChalYouness(config)#show switch vlan
+===
+![affichie inter vlan](https://github.com/c-youness/ASA-VLAN-Port-Security-Line-Vty-/assets/114768920/68f51204-6895-430f-a5dd-dfa489d06499)
+
 
 
