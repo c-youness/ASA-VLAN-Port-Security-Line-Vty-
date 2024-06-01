@@ -44,3 +44,21 @@ R3(config-if)#ip add 172.16.3.1 255.255.255.0
 ======
 R3(config-if)#no shutdown
 ======
+
+ASA
+===
+==> configure the hostname and domain name
+---
+ciscoasa(config)#hostname ChalYouness
+---
+ChalYouness(config)#domain-name C.Youness.ma
+---
+configure the enable mode password
+--
+ChalYouness(config)#enable password YO@UN@ESS@2024
+---
+==> Set the date and time
+---
+ChalYouness(config)#clock set 15:30:00 Jun 1 2024
+---------
+
