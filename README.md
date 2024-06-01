@@ -1,1 +1,46 @@
-# ASA-VLAN-Port-Security-Line-Vty-
+![toplologie](https://github.com/c-youness/ASA-VLAN-Port-Security-Line-Vty-/assets/114768920/de1a0395-eb54-43cd-9277-874540d644c7)
+
+
+![Config interface Partie 1](https://github.com/c-youness/ASA-VLAN-Port-Security-Line-Vty-/assets/114768920/843fa7b6-c4ae-461f-97cf-50a870828b48)
+
+Router 1
+======
+R1(config)#interface S 0/1/0
+========
+R1(config-if)#ip add 10.1.1.2 255.255.255.252
+========
+R1(config-if)#no shutdown
+========
+R1(config-if)#exit 
+========
+R1(config)#interface S 0/1/1
+========
+R1(config-if)#ip add 10.2.2.2 255.255.255.252
+========
+R1(config-if)#no shutdown
+========
+
+Router 2
+======
+R2(config)#interface S 0/1/0
+======
+R2(config-if)#ip add 10.1.1.1 255.255.255.252
+======
+R2(config-if)#no shutdown
+======
+Router 3
+======
+R3(config)#interface S 0/1/0
+======
+R3(config-if)#ip add 10.2.2.1 255.255.255.252
+======
+R3(config-if)#no shutdown
+======
+R3(config-if)#exit 
+======
+R3(config)#interface f 0/0
+======
+R3(config-if)#ip add 172.16.3.1 255.255.255.0
+======
+R3(config-if)#no shutdown
+======
