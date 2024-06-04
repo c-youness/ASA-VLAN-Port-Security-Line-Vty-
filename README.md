@@ -4,22 +4,22 @@
 
 Objectives
 =====
+==> Configure basic ASA settings and interface security levels
+===
+==> Configure routing, address translation, and inspection policy 
 ==
-        Configure basic ASA settings and interface security levels using CLI
+==> Configure DHCP, AAA, and SSH,DMZ, Static NAT, and ACLs
 ==
-=
-        Configure routing, address translation, and inspection policy using CLI
-==
-
-         Configure DHCP, AAA, and SSH, DMZ,Static NAT ACLs
 
 
 Configure ASA Settings and Interface Security Using the CLI
 -------
-  Configure the ASA hostname as CCNAS-ASA
+===>  Configure the ASA hostname as CCNAS-ASA
 --
 ciscoasa(config)#hostname CCNAS-ASA
 --
+===> Configure the domain name
+ ---
 CCNAS-ASA(config)#domain-name ccnasecurity.com
 --
 ===> Configure the enable mode password.
@@ -90,7 +90,10 @@ CCNAS-ASA(config-pmap-c)# inspect icmp
 ====
 CCNAS-ASA(config-pmap-c)# exit
 ====
+CCNAS-ASA(config)# service-policy global_policy global
+---
 
+--
 ==> Configure DHCP, AAA, and SSH
 ==
 Configure the ASA as a DHCP server.
@@ -122,9 +125,64 @@ CCNAS-ASA(config)# aaa authentication ssh console LOCAL
 --
 CCNAS-ASA(config)# crypto key generate rsa modulus 1024
 --
+==> Configure the ASA to allow SSH connections from any host on the inside network (192.168.1.0/24) and from the remote management host at the branch office (172.16.3.3) on the outside network. 
+---
+CCNAS-ASA(config)# ssh 192.168.1.0 255.255.255.0 inside
+---
+CCNAS-ASA(config)# ssh 172.16.3.3 255.255.255.255 outside
+---
+CCNAS-ASA(config)# ssh timeout 10
+---
 
 
+Establish an SSH session from PC-C to the ASA (209.165.200.226). Troubleshoot if it is not successful.
+==
+PC> ssh -l admin 209.165.200.226
+===
+===> Establish an SSH session from PC-B to the ASA (192.168.1.1). Troubleshoot if  it is not successful.
 
+PC> ssh -l admin 192.168.1.1
+===
 
+ ==> Configure a DMZ, Static NAT, and ACLs
+ ==
+ Configure the DMZ interface VLAN 3 on the ASA.
+-- 
+CCNAS-ASA(config)# interface vlan 3
+===
+CCNAS-ASA(config-if)# ip address 192.168.2.1 255.255.255.0
+===
+CCNAS-ASA(config-if)# no forward interface vlan 1
+===
+CCNAS-ASA(config-if)# nameif dmz
+--
+CCNAS-ASA(config-if)# security-level 70
+---
+==> Assign ASA physical interface E0/2 to DMZ VLAN 3 and enable the interface.
+---
+CCNAS-ASA(config-if)# interface Ethernet0/2
+==
+CCNAS-ASA(config-if)# switchport access vlan 3
+===
+Configure a network object named dmz-server and assign it the static IP address of the DMZ server (192.168.2.3). While in object definition mode, use the nat command to specify that this object is used to translate a DMZ address to an outside address using static NAT, and specify a public translated address of 209.165.200.227.
+---
+CCNAS-ASA(config)# object network dmz-server
+---
+CCNAS-ASA(config-network-object)# host 192.168.2.3
+---
+CCNAS-ASA(config-network-object)# nat (dmz,outside) static 209.165.200.227
+---
+CCNAS-ASA(config-network-object)# exit
+===
 
+Configure an ACL to allow access to the DMZ server from the Internet.
+==
+Configure a named access list OUTSIDE-DMZ that permits the TCP protocol on port 80 from any external host to the internal IP address of the DMZ server. Apply the access list to the ASA outside interface in the “IN” direction
+===
+CCNAS-ASA(config)# access-list OUTSIDE-DMZ permit icmp any host 192.168.2.3
+===
+CCNAS-ASA(config)# access-list OUTSIDE-DMZ permit tcp any host 192.168.2.3 eq 80
+===
+CCNAS-ASA(config)# access-group OUTSIDE-DMZ in interface outside
+===
 
