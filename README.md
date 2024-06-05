@@ -73,7 +73,7 @@ CCNAS-ASA(config-network-object)# end
 ==
 
 ===> Modify the default MPF application inspection global service policy.
---
+---------
 Create the class-map, policy-map, and service-policy. Add the inspection of ICMP traffic to the policy map list using the following commands
 ====
 CCNAS-ASA(config)# class-map inspection_default
@@ -91,7 +91,7 @@ CCNAS-ASA(config-pmap-c)# inspect icmp
 CCNAS-ASA(config-pmap-c)# exit
 ====
 CCNAS-ASA(config)# service-policy global_policy global
----
+=====
 
 --
 ==> Configure DHCP, AAA, and SSH
@@ -140,6 +140,7 @@ Establish an SSH session from PC-C to the ASA (209.165.200.226). Troubleshoot if
 PC> ssh -l admin 209.165.200.226
 ===
 ===> Establish an SSH session from PC-B to the ASA (192.168.1.1). Troubleshoot if  it is not successful.
+==
 
 PC> ssh -l admin 192.168.1.1
 ===
@@ -147,7 +148,8 @@ PC> ssh -l admin 192.168.1.1
  ==> Configure a DMZ, Static NAT, and ACLs
  ==
  Configure the DMZ interface VLAN 3 on the ASA.
--- 
+====
+
 CCNAS-ASA(config)# interface vlan 3
 ===
 CCNAS-ASA(config-if)# ip address 192.168.2.1 255.255.255.0
@@ -155,7 +157,7 @@ CCNAS-ASA(config-if)# ip address 192.168.2.1 255.255.255.0
 CCNAS-ASA(config-if)# no forward interface vlan 1
 ===
 CCNAS-ASA(config-if)# nameif dmz
---
+===
 CCNAS-ASA(config-if)# security-level 70
 ---
 ==> Assign ASA physical interface E0/2 to DMZ VLAN 3 and enable the interface.
@@ -167,11 +169,11 @@ CCNAS-ASA(config-if)# switchport access vlan 3
 Configure a network object named dmz-server and assign it the static IP address of the DMZ server (192.168.2.3). While in object definition mode, use the nat command to specify that this object is used to translate a DMZ address to an outside address using static NAT, and specify a public translated address of 209.165.200.227.
 ---
 CCNAS-ASA(config)# object network dmz-server
----
+====
 CCNAS-ASA(config-network-object)# host 192.168.2.3
----
+==
 CCNAS-ASA(config-network-object)# nat (dmz,outside) static 209.165.200.227
----
+==
 CCNAS-ASA(config-network-object)# exit
 ===
 
