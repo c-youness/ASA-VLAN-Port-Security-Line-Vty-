@@ -1,5 +1,6 @@
 
-![TOPLOGIE](https://github.com/c-youness/DHCP-AAA-SSH-DMZ-Static-NAT-and-ACLs/assets/114768920/e548efa6-8851-41c0-b33c-26ac305e32b0)
+![TOPLOGIE](https://github.com/c-youness/DHCP-AAA-SSH-DMZ-Static-NAT-and-ACLs/assets/114768920/f4b83e6c-2d27-4de4-8b96-f49e33a004ce)
+
 ![config pc server asa](https://github.com/c-youness/DHCP-AAA-SSH-DMZ-Static-NAT-and-ACLs/assets/114768920/d078fbb2-1886-4a14-9fcd-f5195dc8d21f)
 
 Objectives
